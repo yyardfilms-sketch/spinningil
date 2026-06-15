@@ -9,38 +9,104 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
-  --bg:#0d1117;--bg2:#161b22;--bg3:#1c2230;
-  --gold:#f0b429;--cyan:#00d4ff;--green:#00e676;
-  --red:#ff5252;--orange:#ff9800;--text:#e8eaed;--muted:#8b949e;
-  --border:#30363d;--yborder:#f0b42944;--cborder:#00d4ff33;
+  --bg:#0a0e14;
+  --bg2:#111720;
+  --bg3:#181f2a;
+  --bg4:#1e2738;
+  --gold:#f0b429;
+  --gold2:#d4980f;
+  --cyan:#00d4ff;
+  --cyan2:#0099bb;
+  --green:#00e676;
+  --red:#ff4444;
+  --orange:#ff8c00;
+  --purple:#b388ff;
+  --text:#f0f2f5;
+  --text2:#c8cdd6;
+  --muted:#7a8499;
+  --border:#242d3d;
+  --border2:#2d3848;
+  --yborder:#f0b42930;
+  --cborder:#00d4ff25;
+  --gborder:#00e67625;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;direction:rtl;min-height:100vh;padding-bottom:60px}
 
-.app-header{background:var(--bg2);border-bottom:2px solid var(--gold);padding:12px 16px 8px;text-align:center;position:sticky;top:0;z-index:500}
-.app-title{font-size:19px;font-weight:800;color:var(--gold)}
-.app-beach{font-size:13px;color:var(--cyan);margin-top:2px;min-height:18px}
+.app-header{
+  background:var(--bg2);
+  border-bottom:1px solid var(--yborder);
+  padding:14px 16px 10px;
+  text-align:center;
+  position:sticky;top:0;z-index:500;
+}
+.app-title{
+  font-size:20px;font-weight:900;
+  color:var(--gold);
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.app-beach{
+  font-size:13px;font-weight:600;
+  color:var(--cyan);margin-top:3px;min-height:18px;
+  letter-spacing:0.5px;
+}
 
-.tab-bar{display:flex;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:55px;z-index:499;overflow-x:auto}
+.tab-bar{
+  display:flex;background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:56px;z-index:499;
+  overflow-x:auto;
+}
 .tab-bar::-webkit-scrollbar{height:0}
-.tb{flex:0 0 auto;padding:9px 12px;font-size:12px;font-weight:600;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tb{
+  flex:0 0 auto;padding:11px 14px;
+  font-size:11px;font-weight:700;
+  background:none;border:none;
+  border-bottom:2px solid transparent;
+  color:var(--muted);cursor:pointer;
+  white-space:nowrap;letter-spacing:0.5px;
+  text-transform:uppercase;
+  transition:color 0.15s;
+}
 .tb.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tb:hover{color:var(--text2)}
 
 .page{display:none}.page.active{display:block}
-.sec{background:var(--bg2);border:1px solid var(--yborder);border-radius:12px;margin:10px;padding:14px}
-.sec-t{font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:11px}
+.sec{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  margin:10px;padding:16px;
+  overflow:hidden;
+}
+.sec-t{
+  font-size:13px;font-weight:800;
+  color:var(--cyan);margin-bottom:13px;
+  letter-spacing:1px;text-transform:uppercase;
+}
 
 /* SELECTORS */
 .lbl{font-size:11px;color:var(--muted);margin-bottom:6px;padding-right:8px;border-right:2px solid var(--red)}
 .btn-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px}
-.sbtn{background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:12px;font-weight:600;padding:8px 12px;cursor:pointer}
-.sbtn:hover{border-color:var(--gold)}
-.sbtn.active{background:var(--gold);color:#111;border-color:var(--gold)}
+.sbtn{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;color:var(--text2);font-size:12px;
+  font-weight:700;padding:9px 14px;cursor:pointer;
+  letter-spacing:0.3px;transition:all 0.15s;
+}
+.sbtn:hover{border-color:var(--gold2);color:var(--text)}
+.sbtn.active{background:var(--gold);color:#0a0e14;border-color:var(--gold)}
 .bgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 @media(min-width:380px){.bgrid{grid-template-columns:repeat(3,1fr)}}
-.bbtn{background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:11px;font-weight:600;padding:8px 5px;cursor:pointer;text-align:center;line-height:1.3}
-.bbtn:hover{border-color:var(--cyan)}
-.bbtn.active{border-color:var(--cyan);background:#00d4ff15;color:var(--cyan)}
+.bbtn{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;color:var(--text2);font-size:11px;
+  font-weight:700;padding:10px 6px;cursor:pointer;
+  text-align:center;line-height:1.3;transition:all 0.15s;
+}
+.bbtn:hover{border-color:var(--cyan2);color:var(--text)}
+.bbtn.active{border-color:var(--cyan);background:#00d4ff10;color:var(--cyan)}
 .search-wrap{position:relative;margin-bottom:10px}
 .search-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:13px;padding:9px 12px 9px 32px;direction:rtl}
 .search-input::placeholder{color:var(--muted)}
@@ -49,7 +115,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-se
 
 /* MAP */
 #mapContainer{height:380px;border-radius:10px;overflow:hidden;margin:0 10px 10px;border:1px solid var(--yborder)}
-.leaflet-container{background:#0d1117!important}
+.leaflet-container{background:#0a0e14!important}
 .map-popup{font-family:'Segoe UI',Arial,sans-serif;direction:rtl;text-align:right;min-width:150px}
 .map-popup h4{font-size:13px;font-weight:700;color:#f0b429;margin-bottom:4px}
 .map-popup .pop-score{font-size:18px;font-weight:900;margin:2px 0}
@@ -57,94 +123,159 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-se
 .map-popup .pop-btn{display:block;margin-top:7px;background:#f0b429;color:#111;border:none;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;width:100%;text-align:center}
 
 /* STATUS */
-.status-banner{border-radius:8px;padding:10px 14px;text-align:center;font-size:14px;font-weight:700;margin-bottom:11px}
-.s-opt{background:#00e67618;border:1.5px solid var(--green);color:var(--green)}
-.s-good{background:#00d4ff18;border:1.5px solid var(--cyan);color:var(--cyan)}
-.s-fair{background:#ff980018;border:1.5px solid var(--orange);color:var(--orange)}
-.s-poor{background:#ff525218;border:1.5px solid var(--red);color:var(--red)}
+.status-banner{
+  border-radius:10px;padding:13px 16px;
+  text-align:center;font-size:15px;
+  font-weight:800;margin-bottom:13px;
+  letter-spacing:0.5px;
+}
+.s-opt{background:#00e67612;border:1.5px solid var(--green);color:var(--green)}
+.s-good{background:#00d4ff12;border:1.5px solid var(--cyan);color:var(--cyan)}
+.s-fair{background:#ff8c0012;border:1.5px solid var(--orange);color:var(--orange)}
+.s-poor{background:#ff444412;border:1.5px solid var(--red);color:var(--red)}
 
 /* COND CARDS */
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.cgrid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:8px;margin-bottom:12px;
+}
 @media(min-width:380px){.cgrid{grid-template-columns:repeat(4,1fr)}}
-.cc{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 4px;text-align:center}
-.cc.hl{border-color:var(--cyan);background:#00d4ff0a}
-.cc-i{font-size:19px;margin-bottom:2px}
-.cc-v{font-size:15px;font-weight:700}
-.cc-s{font-size:10px;color:var(--muted)}
-.cc-l{font-size:10px;color:var(--muted);margin-top:4px}
+.cc{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:12px 6px;text-align:center;
+}
+.cc.hl{border-color:var(--cyan2);background:#00d4ff08}
+.cc-i{font-size:22px;margin-bottom:4px;line-height:1}
+.cc-v{font-size:16px;font-weight:800;color:var(--text);line-height:1.2}
+.cc-s{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.3}
+.cc-l{font-size:10px;color:var(--muted);margin-top:6px;
+  font-weight:600;letter-spacing:0.5px;text-transform:uppercase}
 
 /* HOURLY */
 .tbl-w{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.htbl{width:100%;border-collapse:collapse;font-size:11px;min-width:480px}
-.htbl th{background:var(--bg3);color:var(--muted);padding:7px 3px;text-align:center;font-weight:600;border-bottom:1px solid var(--border)}
-.htbl td{padding:6px 3px;text-align:center;border-bottom:1px solid #ffffff07}
+.htbl{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
+.htbl th{
+  background:var(--bg3);color:var(--muted);
+  padding:9px 5px;text-align:center;font-weight:700;
+  border-bottom:1px solid var(--border);font-size:11px;
+  letter-spacing:0.5px;text-transform:uppercase;
+}
+.htbl td{padding:9px 5px;text-align:center;border-bottom:1px solid var(--border)}
+.htbl tr:hover td{background:var(--bg3)}
+.htbl tr.now{background:#00d4ff08}
 .htbl tr.now td{color:var(--cyan)}
-.hrc{color:var(--cyan);font-weight:700;white-space:nowrap}
-.wb{display:inline-block;border-radius:4px;padding:2px 5px;font-weight:700;font-size:10px;min-width:48px}
+.hrc{color:var(--cyan);font-weight:800;white-space:nowrap;font-size:13px}
+.wb{
+  display:inline-block;border-radius:5px;
+  padding:3px 7px;font-weight:800;font-size:11px;min-width:50px;
+  letter-spacing:0.3px;
+}
 .wb-ok{background:#00e67620;color:var(--green)}
-.wb-med{background:#ff980020;color:var(--orange)}
-.wb-hi{background:#ff525220;color:var(--red)}
+.wb-med{background:#ff8c0020;color:var(--orange)}
+.wb-hi{background:#ff444420;color:var(--red)}
 .wvc-ok{color:var(--green);font-weight:700}
 .wvc-med{color:var(--orange);font-weight:700}
 .wvc-bad{color:var(--red);font-weight:700}
 .swell-badge{display:inline-block;background:#00d4ff15;color:var(--cyan);border-radius:3px;padding:1px 4px;font-size:9px}
 
 /* POTENTIAL */
-.pot-row{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid #ffffff05}
-.pot-hr{font-size:11px;color:var(--cyan);width:36px;flex-shrink:0}
-.pot-bw{flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden}
-.pot-b{height:100%;border-radius:3px;display:flex;align-items:center;padding-right:4px}
-.pot-b span{font-size:9px;font-weight:700;color:#111}
-.pot-lbl{font-size:10px;width:50px}
-.pot-tmp{font-size:10px;color:var(--muted);width:28px;text-align:center}
+.pot-row{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 0;border-bottom:1px solid var(--border);
+}
+.pot-hr{font-size:12px;color:var(--cyan);width:40px;
+  flex-shrink:0;font-weight:700}
+.pot-bw{flex:1;background:var(--bg3);border-radius:4px;height:22px;overflow:hidden}
+.pot-b{
+  height:100%;border-radius:4px;
+  display:flex;align-items:center;padding-right:8px;
+}
+.pot-b span{font-size:11px;font-weight:800;color:#111}
+.pot-lbl{font-size:11px;width:55px;font-weight:700}
+.pot-tmp{font-size:11px;color:var(--muted);width:32px;text-align:center}
 
 /* SCORE */
-.sc-wrap{display:flex;flex-direction:column;align-items:center;padding:6px 0}
-.sc-circ{position:relative;width:96px;height:96px;margin-bottom:7px}
+.sc-wrap{display:flex;flex-direction:column;align-items:center;padding:10px 0}
+.sc-circ{position:relative;width:120px;height:120px;margin-bottom:10px}
 .sc-circ svg{transform:rotate(-90deg)}
-.sc-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;font-weight:900}
-.sc-lbl{font-size:14px;font-weight:700;margin-bottom:3px}
-.sc-time{font-size:11px;color:var(--muted);margin-bottom:9px}
-.tip-box{background:var(--bg3);border-right:3px solid;border-radius:0 7px 7px 0;padding:9px 11px;font-size:11px;line-height:1.65;width:100%}
+.sc-num{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:20px;font-weight:900;letter-spacing:-1px;
+}
+.sc-lbl{font-size:16px;font-weight:800;margin-bottom:4px;letter-spacing:0.5px}
+.sc-time{font-size:12px;color:var(--muted);margin-bottom:12px;font-weight:600}
+.tip-box{
+  background:var(--bg3);border-right:3px solid;
+  border-radius:0 8px 8px 0;padding:11px 13px;
+  font-size:12px;line-height:1.7;width:100%;color:var(--text2);
+}
 
 /* SUN/MOON */
-.sun-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px}
-.sun-card{background:var(--bg3);border:1.5px solid var(--cborder);border-radius:9px;padding:10px;text-align:center}
-.sun-card .si{font-size:17px}
-.sun-card .st{font-size:21px;font-weight:700;margin:3px 0}
-.sun-card .sl{font-size:10px;color:var(--muted)}
-.moon-card{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:11px;text-align:center}
+.sun-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.sun-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:12px;text-align:center;
+}
+.sun-card .si{font-size:20px;margin-bottom:4px}
+.sun-card .st{font-size:22px;font-weight:900;margin:4px 0;color:var(--text)}
+.sun-card .sl{font-size:10px;color:var(--muted);
+  font-weight:600;letter-spacing:0.5px;text-transform:uppercase}
+.moon-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:14px;text-align:center;
+}
 
 /* WEEKLY */
 .wk-scroll{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x mandatory}
 .wk-scroll::-webkit-scrollbar{height:3px}
 .wk-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-.dc{flex:0 0 72px;background:var(--bg3);border:1.5px solid var(--border);border-radius:9px;padding:8px 4px;text-align:center;cursor:pointer;scroll-snap-align:start}
-.dc:hover{border-color:var(--cyan)}
-.dc.active{border-color:var(--cyan);background:#00d4ff0f}
-.dc-n{font-size:10px;color:var(--muted)}
-.dc-d{font-size:9px;color:var(--muted);margin-bottom:4px}
-.dc-i{font-size:18px;margin-bottom:2px}
-.dc-w{font-size:9px;font-weight:700;background:var(--cborder);color:var(--cyan);border-radius:3px;padding:1px 3px;margin-top:2px}
+.dc{
+  flex:0 0 76px;background:var(--bg3);
+  border:1.5px solid var(--border);border-radius:10px;
+  padding:10px 5px;text-align:center;cursor:pointer;
+  scroll-snap-align:start;transition:all 0.15s;
+}
+.dc:hover{border-color:var(--cyan2)}
+.dc.active{border-color:var(--cyan);background:#00d4ff0a}
+.dc-n{font-size:11px;color:var(--muted);font-weight:700;
+  text-transform:uppercase;letter-spacing:0.5px}
+.dc-d{font-size:10px;color:var(--muted);margin-bottom:5px}
+.dc-i{font-size:20px;margin-bottom:3px}
+.dc-w{
+  font-size:10px;font-weight:700;background:var(--cborder);
+  color:var(--cyan);border-radius:4px;padding:2px 4px;margin-top:3px;
+}
 
 /* FISH CARDS */
-.fc{background:var(--bg3);border-radius:10px;padding:11px;margin-bottom:9px}
-.fc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
-.fc-name{font-size:13px;font-weight:700}
-.fc-badge{border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700}
-.fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px;margin-bottom:7px}
-.fc-grid .k{color:var(--muted)}
-.fc-tip{font-size:11px;border-right:2px solid;padding:5px 8px;border-radius:0 6px 6px 0;background:var(--bg2);line-height:1.55}
-.season-pills{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:6px}
-.sp{font-size:9px;padding:2px 5px;border-radius:3px;font-weight:700}
-.sp.on{background:#00e67620;color:var(--green)}
-.sp.off{background:#ffffff08;color:var(--muted)}
-.sp.cur{background:var(--green);color:#111}
+.fc{background:var(--bg3);border-radius:12px;padding:14px;margin-bottom:10px}
+.fc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.fc-name{font-size:14px;font-weight:800;letter-spacing:0.3px}
+.fc-badge{
+  border-radius:6px;padding:4px 10px;
+  font-size:10px;font-weight:800;letter-spacing:0.5px;
+  text-transform:uppercase;
+}
+.fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;margin-bottom:9px}
+.fc-grid .k{color:var(--muted);font-weight:600}
+.fc-tip{
+  font-size:12px;border-right:3px solid;
+  padding:8px 10px;border-radius:0 8px 8px 0;
+  background:var(--bg2);line-height:1.6;color:var(--text2);
+}
+.season-pills{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
+.sp{font-size:9px;padding:3px 6px;border-radius:4px;font-weight:800;letter-spacing:0.3px}
+.sp.on{background:#00e67618;color:var(--green)}
+.sp.off{background:var(--bg4);color:var(--muted)}
+.sp.cur{background:var(--green);color:#0a0e14}
 
 /* INFO ROWS */
-.ir{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #ffffff07;font-size:12px}
-.ir .ik{color:var(--muted)}
-.ir .iv{font-weight:600}
+.ir{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;
+}
+.ir .ik{color:var(--muted);font-weight:600}
+.ir .iv{font-weight:700;color:var(--text)}
 .tag{display:inline-block;background:#00d4ff15;color:var(--cyan);border-radius:4px;padding:2px 7px;font-size:11px;margin:2px}
 .fish-list{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 
@@ -153,9 +284,19 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-se
 
 /* LOADING */
 .loading{display:flex;flex-direction:column;align-items:center;padding:32px 16px;color:var(--muted)}
-.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:9px}
+.spinner{
+  width:32px;height:32px;
+  border:3px solid var(--border2);
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:spin .7s linear infinite;margin-bottom:10px;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
-.info-note{font-size:10px;color:var(--muted);background:var(--bg3);border-radius:5px;padding:5px 8px;margin-top:5px;line-height:1.5}
+.info-note{
+  font-size:11px;color:var(--muted);background:var(--bg3);
+  border-radius:6px;padding:7px 10px;margin-top:7px;
+  line-height:1.6;border-right:2px solid var(--border2);
+}
 </style>
 </head>
 <body>
@@ -201,15 +342,6 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-se
   </div>
 </div>
 
-<!-- MAP PAGE (within select) - standalone map tab -->
-<div id="page-map" class="page">
-  <div class="sec" style="padding:10px">
-    <div class="sec-t" style="margin-bottom:8px">🗺️ מפת כל החופים – לחץ על דגלון לבחירה</div>
-    <div id="mapContainer"></div>
-    <div class="info-note">💡 לחץ על דגלון לפרטי החוף. צבע = ציון דיג (ירוק=מצוין, צהוב=סביר, אדום=לא מומלץ). גרור/זום לניווט.</div>
-  </div>
-</div>
-
 <!-- NOW PAGE -->
 <div id="page-now" class="page">
   <div id="content-now"><div class="sec"><div class="loading"><div class="spinner"></div>בחר חוף תחילה</div></div></div>
@@ -244,159 +376,162 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-se
 // ════════════ BEACHES ════════════════════════════════════
 const BEACHES = {
   north:[
-    {id:'rosh_hanikra',name:'ראש הנקרה',lat:33.0875,lon:35.1026,fish:['לוקוס','דנים','מוסר'],structure:'סלעי עם מפרצים',tip:'דיג לילי מצוין ליד הסלעים הצפוניים. פיתיון חי.'},
-    {id:'achziv',name:'אכזיב',lat:33.0489,lon:35.1043,fish:['דנים','מוסר','בס'],structure:'שמורת טבע + שוניות',tip:'מחוץ לגבולות השמורה. דגים גדולים ליד השוניות.'},
-    {id:'nahariya_north',name:'נהריה צפון',lat:33.0086,lon:35.0930,fish:['דנים','מוסר','לוקוס'],structure:'חוף חולי + שוברי גלים',tip:'שוברי הגלים הישנים – ריכוז דגים. עדיף שחרית.'},
-    {id:'nahariya_south',name:'נהריה דרום',lat:32.9980,lon:35.0880,fish:['דנים','אמנון'],structure:'חוף חולי',tip:'שקט ומשפחתי. בוקר מוקדם.'},
-    {id:'betzet',name:'חוף בצת',lat:33.0670,lon:35.1100,fish:['דנים','בס'],structure:'סלעי טבעי מבודד',tip:'חוף נסתר – דגים לא מבועתים. שביל קצר.'},
-    {id:'akko_old',name:'עכו – נמל עתיק',lat:32.9234,lon:35.0783,fish:['לוקוס','דנים','מוסר'],structure:'נמל עתיק + שרידים',tip:'מבנים עתיקים מתחת למים = בית דגים. מומלץ מאוד!'},
-    {id:'akko_south',name:'עכו דרום',lat:32.9120,lon:35.0760,fish:['דנים','אמנון'],structure:'חוף חולי',tip:'חוף פתוח. שחרית מומלץ.'},
+    {id:'rosh_hanikra',name:'ראש הנקרה',lat:33.0875,lon:35.1026,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'סלעי עם מפרצים',tip:'דיג לילי מצוין ליד הסלעים הצפוניים. פיתיון חי.'},
+    {id:'achziv',name:'אכזיב',lat:33.0489,lon:35.1043,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'שמורת טבע + שוניות',tip:'מחוץ לגבולות השמורה. דגים גדולים ליד השוניות.'},
+    {id:'nahariya_north',name:'נהריה צפון',lat:33.0086,lon:35.0930,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + שוברי גלים',tip:'שוברי הגלים הישנים – ריכוז דגים. עדיף שחרית.'},
+    {id:'nahariya_south',name:'נהריה דרום',lat:32.9980,lon:35.0880,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי',tip:'שקט ומשפחתי. בוקר מוקדם.'},
+    {id:'betzet',name:'חוף בצת',lat:33.0670,lon:35.1100,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'סלעי טבעי מבודד',tip:'חוף נסתר – דגים לא מבועתים. שביל קצר.'},
+    {id:'akko_old',name:'עכו – נמל עתיק',lat:32.9234,lon:35.0783,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'נמל עתיק + שרידים',tip:'מבנים עתיקים מתחת למים = בית דגים. מומלץ מאוד!'},
+    {id:'akko_south',name:'עכו דרום',lat:32.9120,lon:35.0760,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי',tip:'חוף פתוח. שחרית מומלץ.'},
   ],
   haifa:[
-    {id:'haifa_bat_galim',name:'בת גלים',lat:32.8350,lon:34.9680,fish:['דנים','מוסר','לוקוס'],structure:'שכונת חוף + טייל',tip:'לפנות בוקר ליד הטייל – דגים גדולים.'},
-    {id:'haifa_carmel',name:'כרמל ביץ\'',lat:32.8560,lon:34.9760,fish:['דנים','מוסר'],structure:'חוף חולי + שוברי גלים',tip:'שוברי הגלים הצפוניים – נקודה מצוינת.'},
-    {id:'haifa_hof_hadar',name:'הוף הדר',lat:32.7940,lon:34.9896,fish:['בס','פליימן','דנים'],structure:'חוף חולי + נמל',tip:'שוברי גלים דרומיים של הנמל.'},
-    {id:'atlit',name:'עתלית',lat:32.6938,lon:34.9382,fish:['דנים','מוסר','לוקוס'],structure:'חוף + מצודה צלבנית',tip:'ליד שרידי המצודה הסלעית – מבנה מצוין.'},
-    {id:'dor',name:'חוף דור',lat:32.6149,lon:34.9173,fish:['דנים','מוסר','אמנון'],structure:'איים קטנים + חול',tip:'הדיג טוב בין האיים. כדאי עם גרב.'},
-    {id:'tantura',name:'תנתורה',lat:32.5996,lon:34.9116,fish:['דנים','מוסר','לוקוס'],structure:'ספינה טרופה + חול',tip:'ספינה טרופה = בית דגים מצוין!'},
+    {id:'haifa_bat_galim',name:'בת גלים',lat:32.8350,lon:34.9680,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'שכונת חוף + טייל',tip:'לפנות בוקר ליד הטייל – דגים גדולים.'},
+    {id:'haifa_carmel',name:'כרמל ביץ\'',lat:32.8560,lon:34.9760,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + שוברי גלים',tip:'שוברי הגלים הצפוניים – נקודה מצוינת.'},
+    {id:'haifa_hof_hadar',name:'הוף הדר',lat:32.7940,lon:34.9896,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + נמל',tip:'שוברי גלים דרומיים של הנמל.'},
+    {id:'atlit',name:'עתלית',lat:32.6938,lon:34.9382,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף + מצודה צלבנית',tip:'ליד שרידי המצודה הסלעית – מבנה מצוין.'},
+    {id:'dor',name:'חוף דור',lat:32.6149,lon:34.9173,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'איים קטנים + חול',tip:'הדיג טוב בין האיים. כדאי עם גרב.'},
+    {id:'tantura',name:'תנתורה',lat:32.5996,lon:34.9116,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'ספינה טרופה + חול',tip:'ספינה טרופה = בית דגים מצוין!'},
   ],
   sharon:[
-    {id:'caesarea',name:'קיסריה – נמל',lat:32.4992,lon:34.9027,fish:['דנים','לוקוס','מוסר'],structure:'נמל רומי עתיק + חול',tip:'שרידי הנמל הרומי = מבנה תת-ימי מושלם!'},
-    {id:'habonim',name:'חוף הבונים',lat:32.6403,lon:34.9237,fish:['דנים','מוסר'],structure:'שמורת טבע + שוניות',tip:'שמורה. יש לשמור על הכללים. דגים גדולים.'},
-    {id:'hadera_power',name:'חדרה – תחנת כוח',lat:32.4700,lon:34.8690,fish:['לוקוס','דנים','בס'],structure:'מים חמים + מזח',tip:'מים חמים מהתחנה = דגים כל השנה. מצוין בחורף!'},
-    {id:'michmoret',name:'מכמורת',lat:32.4154,lon:34.8640,fish:['דנים','לוקוס','מוסר'],structure:'כפר דייגים + נמל קטן',tip:'כפר דייגים ותיק. הדייגים המקומיים יודעים הכל.'},
-    {id:'netanya_north',name:'נתניה צפון',lat:32.3380,lon:34.8540,fish:['דנים','מוסר','פליימן'],structure:'חוף חולי + כורכר',tip:'רוח מערבית = תנאים טובים. ציוד כבד.'},
-    {id:'netanya_center',name:'נתניה מרכז',lat:32.3226,lon:34.8548,fish:['דנים','מוסר'],structure:'חוף עירוני',tip:'גישה נוחה. שחרית לפני הרוחצים.'},
-    {id:'poleg',name:'חוף הפולג',lat:32.3412,lon:34.8421,fish:['דנים','מוסר','לוקוס'],structure:'שפך נחל + כורכר',tip:'שפך נחל הפולג = חובה בחורף!'},
-    {id:'arsuf',name:'ארסוף',lat:32.2020,lon:34.8010,fish:['דנים','מוסר','לוקוס'],structure:'כורכר + מצוק + שרידים',tip:'מצוק + כורכר = בית דגים מושלם. אחד הטובים!'},
-    {id:'herzliya_marina',name:'הרצליה מרינה',lat:32.1700,lon:34.7951,fish:['לוקוס','מוסר','דנים'],structure:'מרינה + שוברי גלים',tip:'שובר חיצוני של המרינה – נקודה מצוינת!'},
-    {id:'shefayim',name:'שפיים',lat:32.2200,lon:34.8070,fish:['דנים','מוסר'],structure:'חוף קיבוץ + כורכר',tip:'נקי ושקט. כניסה דרך הקיבוץ.'},
-    {id:'gaash',name:'גאש',lat:32.2700,lon:34.8350,fish:['דנים','לוקוס'],structure:'חוף כפרי + כורכר',tip:'כורכר = ריכוז דגים טוב.'},
+    {id:'caesarea',name:'קיסריה – נמל',lat:32.4992,lon:34.9027,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'נמל רומי עתיק + חול',tip:'שרידי הנמל הרומי = מבנה תת-ימי מושלם!'},
+    {id:'habonim',name:'חוף הבונים',lat:32.6403,lon:34.9237,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'שמורת טבע + שוניות',tip:'שמורה. יש לשמור על הכללים. דגים גדולים.'},
+    {id:'hadera_power',name:'חדרה – תחנת כוח',lat:32.4700,lon:34.8690,fish:['גומבר','לוקוס','טרכון','לברק'],structure:'מים חמים + מזח',tip:'מים חמים מהתחנה = דגים כל השנה. מצוין בחורף!'},
+    {id:'michmoret',name:'מכמורת',lat:32.4154,lon:34.8640,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'כפר דייגים + נמל קטן',tip:'כפר דייגים ותיק. הדייגים המקומיים יודעים הכל.'},
+    {id:'netanya_north',name:'נתניה צפון',lat:32.3380,lon:34.8540,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + כורכר',tip:'רוח מערבית = תנאים טובים. ציוד כבד.'},
+    {id:'netanya_center',name:'נתניה מרכז',lat:32.3226,lon:34.8548,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף עירוני',tip:'גישה נוחה. שחרית לפני הרוחצים.'},
+    {id:'poleg',name:'חוף הפולג',lat:32.3412,lon:34.8421,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'שפך נחל + כורכר',tip:'שפך נחל הפולג = חובה בחורף!'},
+    {id:'arsuf',name:'ארסוף',lat:32.2020,lon:34.8010,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'כורכר + מצוק + שרידים',tip:'מצוק + כורכר = בית דגים מושלם. אחד הטובים!'},
+    {id:'herzliya_marina',name:'הרצליה מרינה',lat:32.1700,lon:34.7951,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'מרינה + שוברי גלים',tip:'שובר חיצוני של המרינה – נקודה מצוינת!'},
+    {id:'shefayim',name:'שפיים',lat:32.2200,lon:34.8070,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף קיבוץ + כורכר',tip:'נקי ושקט. כניסה דרך הקיבוץ.'},
+    {id:'gaash',name:'גאש',lat:32.2700,lon:34.8350,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף כפרי + כורכר',tip:'כורכר = ריכוז דגים טוב.'},
   ],
   center:[
-    {id:'tel_aviv_gordon',name:'גורדון – ת"א',lat:32.0869,lon:34.7664,fish:['פליימן','מוסר','דנים'],structure:'עירוני + גלי טיפות',tip:'גלי הטיפות = מבנה. ערב מאוחר = דגים גדולים.'},
-    {id:'jaffa_old',name:'יפו – נמל עתיק',lat:32.0504,lon:34.7497,fish:['לוקוס','דנים','מוסר','פליימן'],structure:'נמל עתיק + סלעים',tip:'אחד הטובים בת"א. סלעי הנמל = שפע דגים!'},
-    {id:'jaffa_south',name:'יפו דרום',lat:32.0430,lon:34.7510,fish:['דנים','מוסר'],structure:'חוף חולי + סלעים',tip:'מדרום לנמל יפו – פחות ידוע, יותר דגים.'},
-    {id:'bat_yam_north',name:'בת ים צפון',lat:32.0230,lon:34.7400,fish:['דנים','פליימן','מוסר'],structure:'שוברי גלים ישנים',tip:'שוברים ישנים = ריכוז דגים. ים גועש = טוב!'},
-    {id:'bat_yam_south',name:'בת ים דרום',lat:32.0100,lon:34.7380,fish:['דנים','מוסר'],structure:'חוף חולי + כורכר',tip:'מבנה כורכר דרומה. עדיף שחרית.'},
-    {id:'rishon_beach',name:'ראשל"צ חוף',lat:31.9573,lon:34.7260,fish:['דנים','מוסר'],structure:'חוף חולי + שמורה',tip:'שמורה = הרבה דגים.'},
-    {id:'palmahim',name:'פלמחים',lat:31.9214,lon:34.6936,fish:['דנים','לוקוס','מוסר'],structure:'שמור + דיונות',tip:'אחד החופים הטבעיים ביותר. מלא דגים!'},
+    {id:'tel_aviv_gordon',name:'גורדון – ת"א',lat:32.0869,lon:34.7664,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'עירוני + גלי טיפות',tip:'גלי הטיפות = מבנה. ערב מאוחר = דגים גדולים.'},
+    {id:'jaffa_old',name:'יפו – נמל עתיק',lat:32.0504,lon:34.7497,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'נמל עתיק + סלעים',tip:'אחד הטובים בת"א. סלעי הנמל = שפע דגים!'},
+    {id:'jaffa_south',name:'יפו דרום',lat:32.0430,lon:34.7510,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + סלעים',tip:'מדרום לנמל יפו – פחות ידוע, יותר דגים.'},
+    {id:'bat_yam_north',name:'בת ים צפון',lat:32.0230,lon:34.7400,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'שוברי גלים ישנים',tip:'שוברים ישנים = ריכוז דגים. ים גועש = טוב!'},
+    {id:'bat_yam_south',name:'בת ים דרום',lat:32.0100,lon:34.7380,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + כורכר',tip:'מבנה כורכר דרומה. עדיף שחרית.'},
+    {id:'rishon_beach',name:'ראשל"צ חוף',lat:31.9573,lon:34.7260,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + שמורה',tip:'שמורה = הרבה דגים.'},
+    {id:'palmahim',name:'פלמחים',lat:31.9214,lon:34.6936,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'שמור + דיונות',tip:'אחד החופים הטבעיים ביותר. מלא דגים!'},
   ],
   south:[
-    {id:'ashdod_lido',name:'אשדוד – לידו',lat:31.7957,lon:34.6452,fish:['דנים','לוקוס','מוסר'],structure:'חוף חולי + מזח ישן',tip:'ליד המזח הישן – ריכוז דגים. עדיף ערב.'},
-    {id:'ashdod_marina',name:'אשדוד – מרינה',lat:31.8150,lon:34.6550,fish:['דנים','מוסר'],structure:'מרינה + שובר',tip:'שובר גלים החיצוני – נקודה ידועה.'},
-    {id:'ashdod_power',name:'אשדוד – חברת חשמל',lat:31.8320,lon:34.6470,fish:['לוקוס','דנים','בס','גומבר'],structure:'מים חמים מהתחנה + מזח',tip:'מים חמים = דגים כל השנה, ממש כמו חדרה. בחורף – מצוין לגומבר ולוקוס!'},
-    {id:'ashdod_port',name:'אשדוד – נמל',lat:31.8200,lon:34.6370,fish:['לוקוס','דנים','גומבר'],structure:'נמל + שוברי גלים גדולים',tip:'שוברי ענק = מבנה עצום. זהירות מספינות.'},
-    {id:'nitzanim',name:'ניצנים',lat:31.7241,lon:34.5931,fish:['דנים','לוקוס','פליימן'],structure:'חוף חולי רחב',tip:'ארוך ופחות ידוע – הדגים לא מבועתים.'},
-    {id:'ashkelon_marina',name:'אשקלון מרינה',lat:31.6560,lon:34.5420,fish:['דנים','לוקוס','מוסר'],structure:'מרינה + שובר',tip:'שובר גלים = נקודה פרודוקטיבית.'},
-    {id:'ashkelon_national',name:'פארק אשקלון',lat:31.6688,lon:34.5468,fish:['דנים','לוקוס','מוסר'],structure:'חוף שמור + שרידים',tip:'פארק לאומי. שמור = עשיר בדגים.'},
-    {id:'ashkelon_north',name:'אשקלון צפון',lat:31.6880,lon:34.5540,fish:['דנים','מוסר'],structure:'חוף חולי + מפרץ',tip:'שחרית מצוין.'},
-    {id:'zikim',name:'זיקים',lat:31.6197,lon:34.5226,fish:['דנים','מוסר','אמנון'],structure:'חוף טבעי + דיונות',tip:'כמעט בתולי. שחרית.'},
-    {id:'yad_mordechai',name:'יד מרדכי',lat:31.5900,lon:34.5000,fish:['דנים','לוקוס'],structure:'חוף טבעי',tip:'נידח ועשיר. גישה דרך הקיבוץ.'},
+    {id:'ashdod_lido',name:'אשדוד – לידו',lat:31.7957,lon:34.6452,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + מזח ישן',tip:'ליד המזח הישן – ריכוז דגים. עדיף ערב.'},
+    {id:'ashdod_marina',name:'אשדוד – מרינה',lat:31.8150,lon:34.6550,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'מרינה + שובר',tip:'שובר גלים החיצוני – נקודה ידועה.'},
+    {id:'ashdod_power',name:'אשדוד – חברת חשמל',lat:31.8320,lon:34.6470,fish:['גומבר','לוקוס','טרכון','לברק'],structure:'מים חמים מהתחנה + מזח',tip:'מים חמים = דגים כל השנה, ממש כמו חדרה. בחורף – מצוין לגומבר ולוקוס!'},
+    {id:'ashdod_port',name:'אשדוד – נמל',lat:31.8200,lon:34.6370,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'נמל + שוברי גלים גדולים',tip:'שוברי ענק = מבנה עצום. זהירות מספינות.'},
+    {id:'nitzanim',name:'ניצנים',lat:31.7241,lon:34.5931,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי רחב',tip:'ארוך ופחות ידוע – הדגים לא מבועתים.'},
+    {id:'ashkelon_marina',name:'אשקלון מרינה',lat:31.6560,lon:34.5420,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'מרינה + שובר',tip:'שובר גלים = נקודה פרודוקטיבית.'},
+    {id:'ashkelon_national',name:'פארק אשקלון',lat:31.6688,lon:34.5468,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף שמור + שרידים',tip:'פארק לאומי. שמור = עשיר בדגים.'},
+    {id:'ashkelon_north',name:'אשקלון צפון',lat:31.6880,lon:34.5540,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף חולי + מפרץ',tip:'שחרית מצוין.'},
+    {id:'zikim',name:'זיקים',lat:31.6197,lon:34.5226,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף טבעי + דיונות',tip:'כמעט בתולי. שחרית.'},
+    {id:'yad_mordechai',name:'יד מרדכי',lat:31.5900,lon:34.5000,fish:['פלמידה','טונית','אינטיאס','גומבר','לוקוס','טרכון'],structure:'חוף טבעי',tip:'נידח ועשיר. גישה דרך הקיבוץ.'},
   ]
 };
 
 // ════════════ FISH DATABASE ════════════════════════════════
-// מקורות: ויקיפדיה דיג בארץ, dayag.co.il, mafish.org.il, NOAA, FishBase
+// מקורות: fishingmagazine.co.il, fishnet.co.il, fishingaddicts.co.il, babajig.co.il
 const FISH = [
   {
-    id:'tuna', name:'טונה כחולת סנפיר', en:'Thunnus thynnus', icon:'🐋',
-    color:'#00d4ff',
-    // עונות: ינואר=0 ... דצמבר=11
-    seasons:[0,0,0,0,1,1,1,1,0,0,0,0], // מאי-אוגוסט (עוברת בחופי ישראל קיץ)
-    bestMonths:'מאי–אוגוסט',
-    waveMin:0.5, waveMax:2.5, windMin:10, windMax:35,
-    moonBest:'any', // עוברת בלהקות, לא רגישה לירח
+    id:'palmida', name:'פלמידה', en:'Scomberomorus commerson',
+    icon:'🐠', color:'#00e676',
+    seasons:[1,1,1,1,1,0,0,0,1,1,1,1],
+    bestMonths:'ספטמבר–מאי (שיא: נובמבר–פברואר)',
+    waveMin:0.5, waveMax:3.0, windMin:10, windMax:40,
+    moonBest:'any',
     moonNote:'לא רגישה לירח – נעה בלהקות פלגיות',
-    bait:'ספינר גדול, ג\'יג מתכתי 60-120 גר\', דגיגים חיים',
-    method:'זריקה ארוכה / טרולינג מסירה',
-    depth:'פלגי פתוח, 5–50 מ\'',
-    structure:'ים פתוח, חופים פתוחים',
-    minLegal:'70 ס"מ', size:'1–3 מ\'',
-    tip:'מגיעה בקיץ בלהקות לאורך החוף. מסירה עדיף. רוח מזרחית = נעה קרוב לחוף.',
-    fishing:'סירה/קיאק',
-    warning:'⚠️ איסור דיג מסחרי קשור. ספורט – עם רישיון.'
+    lure:'ספינר גדול 40-100 גר\', מינואו 15-20 ס"מ, ניקל כבד',
+    method:'זריקה ארוכה מקסימלית, ריצה מהירה מאוד',
+    gear:'סט מדיום-כבד',
+    depth:'0–40 מ\'',
+    structure:'ים פתוח. חפש להקות. ציפורים מעל המים = סימן',
+    minLegal:'30 ס"מ', size:'40–120 ס"מ',
+    tip:'עונת החורף הגדולה. ים סוער = פלמידות מגיעות לחוף. זרוק כמה שיותר רחוק.',
+    warning:null
   },
   {
-    id:'palmida', name:'פלמידה (בוניטו)', en:'Sarda sarda', icon:'🐟',
-    color:'#00e676',
-    seasons:[0,0,0,1,1,1,0,0,0,1,1,0], // אפריל–יוני + אוקטובר–נובמבר
-    bestMonths:'אפריל–יוני, אוקטובר–נובמבר',
-    waveMin:0.4, waveMax:2.0, windMin:8, windMax:30,
+    id:'tonit', name:'טונית', en:'Euthynnus alletteratus',
+    icon:'🐟', color:'#00d4ff',
+    seasons:[1,1,1,1,1,0,0,0,1,1,1,1],
+    bestMonths:'ספטמבר–מאי (שיא: ינואר–מרץ)',
+    waveMin:0.4, waveMax:2.5, windMin:8, windMax:35,
     moonBest:'any',
-    moonNote:'לא רגישה לירח. פעילה ביום בלהקות',
-    bait:'ספינר מתכתי 20-40 גר\', ג\'יג צבעוני, פיתיון גומי',
-    method:'זריקה ארוכה מהחוף / טרולינג',
+    moonNote:'לא רגישה לירח – נעה בלהקות',
+    lure:'ספינר מתכתי 20-50 גר\', ניקל, ג\'יג קטן',
+    method:'זריקה ארוכה, ריצה מהירה',
+    gear:'סט לייט-מדיום',
     depth:'0–30 מ\'',
     structure:'ים פתוח, חופים פתוחים',
-    minLegal:'30 ס"מ', size:'30–70 ס"מ',
-    tip:'עוברת לאורך החוף באביב ובסתיו. ים גועש = פעילה יותר. צריך לזרוק רחוק.',
-    fishing:'חוף/סירה'
+    minLegal:'30 ס"מ', size:'30–80 ס"מ',
+    tip:'מגיעה עם הפלמידות בחורף. תוקפת בחוזקה. ספינר מתכתי כסף עובד מצוין.',
+    warning:null
   },
   {
-    id:'trachon', name:'טרכון (צנינית)', en:'Trachurus mediterraneus', icon:'🐠',
-    color:'#f0b429',
-    seasons:[1,1,1,1,1,1,1,1,1,1,1,1], // כל השנה – שיא קיץ-סתיו
-    bestMonths:'כל השנה – שיא יולי–נובמבר',
-    waveMin:0.1, waveMax:1.2, windMin:0, windMax:20,
-    moonBest:'new',
-    moonNote:'מולד ירח = פעיל יותר בלילה ליד פנסים. ירח מלא – פחות.',
-    bait:'תולעי ים, שרימפס קטן, פיתיון גומי זעיר 2-3 ס"מ, מכסית קטנה',
-    method:'זריקה קצרה, ציוד קל UL/L',
-    depth:'0–50 מ\'',
-    structure:'כל סוגי החוף, עדיף ליד תאורה בלילה',
-    minLegal:'11 ס"מ', size:'15–35 ס"מ',
-    tip:'הנפוץ ביותר בישראל. נחיל ליד פנסים בלילה = ספקטקל. ציוד אולטרה-לייט.',
-    fishing:'חוף'
-  },
-  {
-    id:'lavrak', name:'לוקוס (דקר ים)', en:'Dicentrarchus labrax', icon:'🐡',
-    color:'#ff9800',
-    seasons:[1,1,1,1,0,0,0,0,0,1,1,1], // ספטמבר–אפריל (חורפי)
-    bestMonths:'ספטמבר–מרץ',
-    waveMin:0.5, waveMax:1.8, windMin:8, windMax:25,
-    moonBest:'new',
-    moonNote:'מולד ירח = מצוין! לוקוס הוא דג לילי שנמנע מאור חזק',
-    bait:'סבידה (דיונון) חיה, ראפאלה צף, פיתיון גומי שחור/כהה, דגיג חי',
-    method:'זריקה ארוכה + גלגול איטי / פיתיון שוקע',
-    depth:'1–10 מ\'',
-    structure:'נמלים, שוברי גלים, פיות נחלים, סלעים',
-    minLegal:'40 ס"מ', size:'40–90 ס"מ',
-    tip:'דג לילי. אוהב ים גועש קצת. שפכי נחלים = זהב. מולד ירח + ים בינוני = פצצה.',
-    fishing:'חוף',
-    warning:'⚠️ איסור דיג רבייה: 30 אפריל–30 יוני. מינימום 40 ס"מ!'
-  },
-  {
-    id:'loukos', name:'לברק (מוסר גדול)', en:'Mugil cephalus', icon:'🐟',
-    color:'#ff5252',
-    seasons:[1,1,1,1,1,1,1,1,1,1,1,1], // כל השנה – שיא סתיו
-    bestMonths:'כל השנה – שיא ספטמבר–נובמבר',
-    waveMin:0.1, waveMax:0.8, windMin:0, windMax:15,
+    id:'intias', name:'אינטיאס', en:'Seriola dumerili',
+    icon:'🐡', color:'#f0b429',
+    seasons:[1,1,1,1,1,0,0,1,1,1,1,1],
+    bestMonths:'ספטמבר–מאי (ענקים), אוגוסט-ספטמבר (בייבי)',
+    waveMin:0.3, waveMax:2.0, windMin:5, windMax:25,
     moonBest:'any',
-    moonNote:'לא רגיש מיוחד. אוהב מים שקטים',
-    bait:'בצק לחם/שריל, קוביית גבינה צהובה, תירס, בצק דג',
-    method:'זריקה קצרה, פיתיון בקרקעית/שטח',
-    depth:'0–3 מ\'',
-    structure:'חופים שקטים, שפכי ביוב מטוהר, מרינות, נמלים',
-    minLegal:'20 ס"מ', size:'25–60 ס"מ',
-    tip:'שכיח ביותר, קל לתפוס. בצק לחם עובד תמיד. שחרית מצוינת. שקט = טוב יותר.',
-    fishing:'חוף'
+    moonNote:'לא רגיש לירח. אוהב מים נקיים',
+    lure:'ניקל 10-15 ס"מ / 40-60 גר\', ג\'יג כבד 60-100 גר\'',
+    method:'הקפצה – הטל רחוק, משוך במהירות עם קפיצות',
+    gear:'סט מדיום-כבד',
+    depth:'0–50 מ\'',
+    structure:'מים עמוקים + חוף. נוטה להישאר בשכבה עליונה',
+    minLegal:'אין הגבלה', size:'0.5–5 ק"ג',
+    tip:'בייבי אינטיאס אוגוסט-ספטמבר = ספקטקל. ענקים בחורף. שיטת ניקל ללא קרס למשוך להקה לחוף.',
+    warning:null
   },
   {
-    id:'gombar', name:'גומבר (ענבר)', en:'Pomatomus saltatrix', icon:'🦈',
-    color:'#b388ff',
-    seasons:[0,0,0,0,1,1,1,1,1,1,0,0], // מאי–אוקטובר (קיץ-סתיו)
-    bestMonths:'מאי–אוקטובר',
-    waveMin:0.3, waveMax:1.8, windMin:5, windMax:25,
+    id:'gombar', name:'גומבר', en:'Pomatomus saltatrix',
+    icon:'🦷', color:'#b388ff',
+    seasons:[1,1,1,1,1,1,1,1,1,1,1,1],
+    bestMonths:'כל השנה (שיא: יולי–נובמבר)',
+    waveMin:0.3, waveMax:2.0, windMin:5, windMax:30,
     moonBest:'new',
-    moonNote:'מולד ירח = פעיל יותר בלילה. ירח מלא = פחות נוח',
-    bait:'ספינר כסף/כחול, פיתיון גומי 8-12 ס"מ, דגיגים חיים, ג\'יג',
-    method:'זריקה ארוכה, ריצת הפיתיון מהירה',
+    moonNote:'מולד ירח = פעיל יותר בלילה. ירח מלא = פחות',
+    lure:'ניקל כסף/זהב, פיתיון נוצה, פנסיל שוקע',
+    method:'הקפצה על פני המים. האט את הריצה! זהירות מהוקסט מיידי',
+    gear:'סט בינוני',
     depth:'0–20 מ\'',
-    structure:'כל סוגי חוף, עדיף ליד קצות שוברי גלים ומזחים',
-    minLegal:'אין הגבלה מינימלית מוגדרת', size:'30–80 ס"מ',
-    tip:'אגרסיבי ולוחמני! תוקף כל דבר. מהיר מאוד. זהירות מהשיניים החדות. מולד = אידאלי.',
-    fishing:'חוף/סירה'
+    structure:'קצות שוברי גלים, מזחים, פתחי נמלים',
+    minLegal:'אין', size:'30–80 ס"מ',
+    tip:'זהירות מהשיניים החדות! בעת תקיפה – אל תעשה הוקסט מיידי. תן 5-8 שניות ואז תוקע.',
+    warning:'⚠️ שיניים חדות מאוד – השתמש בפינצטה!'
+  },
+  {
+    id:'loukos', name:'לוקוס', en:'Epinephelus marginatus',
+    icon:'🦈', color:'#ff9800',
+    seasons:[1,1,1,1,1,1,1,1,1,1,1,1],
+    bestMonths:'כל השנה. ענקים: דצמבר–פברואר בלבד',
+    waveMin:0.4, waveMax:1.8, windMin:5, windMax:25,
+    moonBest:'new',
+    moonNote:'מולד ירח = מצוין! נמנע מאור חזק. לילה עדיף',
+    lure:'ראפאלה שוקע, פנסיל כהה, ג\'יג סיליקון גדול',
+    method:'זריקה ארוכה, גלגול איטי עם עצירות',
+    gear:'סט מדיום',
+    depth:'1–15 מ\'',
+    structure:'נמלים, שוברי גלים, פיות נחלים, שוניות סלע',
+    minLegal:'40 ס"מ', size:'20–100+ ס"מ',
+    tip:'קטנים כל השנה. ענקים רק בחורף עמוק. מולד ירח + שפך נחל + ים בינוני = פצצה.',
+    warning:'⚠️ איסור רבייה: 30 אפריל–30 יוני. מינימום 40 ס"מ!'
+  },
+  {
+    id:'trachon', name:'טרכון', en:'Trachurus mediterraneus',
+    icon:'🐡', color:'#ff5252',
+    seasons:[0,0,0,0,0,0,1,1,1,1,0,0],
+    bestMonths:'יולי–אוקטובר (מתחיל אמצע יוני)',
+    waveMin:0.0, waveMax:1.2, windMin:0, windMax:20,
+    moonBest:'new',
+    moonNote:'מולד ירח = נחילים ליד פנסים בלילה = ספקטקל',
+    lure:'פיתיון גומי 2-4 ס"מ, ניקל זעיר, מכסית קטנה',
+    method:'זריקה קצרה, UL בלבד, הקפצות קטנות',
+    gear:'סט אולטרה-לייט בלבד',
+    depth:'0–30 מ\'',
+    structure:'כל החוף. ליד פנסי תאורה בלילה',
+    minLegal:'11 ס"מ', size:'15–35 ס"מ',
+    tip:'נחיל ליד פנסי חוף בלילה = ספקטקל מדהים. ציוד UL בלבד – ציוד כבד הורס את הכיף.',
+    warning:null
   }
 ];
 
@@ -404,7 +539,7 @@ const FISH = [
 const DAYS=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
 const MONTHS_HE=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 let curRegion='center', curBeach=null, curStyle='shore';
-let wxCache={}, waveChartInst=null, leafMap=null, beachMarkers=[];
+let wxCache={}, waveChartInst=null, leafMap=null, beachMarkers=[], miniMap=null;
 
 const ALL_BEACHES = ()=>Object.values(BEACHES).flat();
 
@@ -510,8 +645,8 @@ function renderMapMarkers(scoreMap={}){
     const sc=scoreMap[b.id]||null;
     const color=sc===null?'#f0b429':sc>=65?'#00e676':sc>=40?'#f0b429':'#ff5252';
     const icon=L.divIcon({
-      html:`<div style="width:28px;height:28px;background:${color};border:2px solid #0d1117;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;box-shadow:0 2px 6px #000a">
-        ${sc!==null?`<span style="font-size:9px;font-weight:900;color:#111">${sc}</span>`:'🎣'}
+      html:`<div style="width:28px;height:28px;background:${color};border:2px solid #0a0e14;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer">
+        ${sc!==null?`<span style="font-size:8px;font-weight:900;color:#111">${sc}%</span>`:'🎣'}
       </div>`,
       className:'',iconSize:[28,28],iconAnchor:[14,14]
     });
@@ -520,7 +655,7 @@ function renderMapMarkers(scoreMap={}){
     marker.bindPopup(`
       <div class="map-popup">
         <h4>🎣 ${b.name}</h4>
-        ${sc!==null?`<div class="pop-score" style="color:${color}">${sc}/100 – ${slTxt}</div>`:''}
+        ${sc!==null?`<div class="pop-score" style="color:${color}">${sc}% – ${slTxt}</div>`:''}
         <div class="pop-fish">${b.fish.slice(0,3).join(' • ')}</div>
         <div class="pop-fish" style="margin-top:3px">📍 ${b.structure}</div>
         <button class="pop-btn" onclick="selectBeachById('${b.id}')">פתח נתוני חוף ←</button>
@@ -555,6 +690,21 @@ async function loadAllScoresForMap(){
     }));
   }
   renderMapMarkers(scoreMap);
+}
+
+function initMiniMap(beach){
+  const el=document.getElementById('beachMiniMap');
+  if(!el) return;
+  if(miniMap){miniMap.remove();miniMap=null;}
+  miniMap=L.map(el,{zoomControl:false,attributionControl:false,
+    dragging:false,scrollWheelZoom:false,doubleClickZoom:false
+  }).setView([beach.lat,beach.lon],14);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {maxZoom:18}).addTo(miniMap);
+  L.circleMarker([beach.lat,beach.lon],{
+    radius:10,fillColor:'#f0b429',color:'#111',weight:2,fillOpacity:1
+  }).addTo(miniMap).bindPopup(beach.name).openPopup();
+  setTimeout(()=>miniMap.invalidateSize(),200);
 }
 
 // ════════════ UI ══════════════════════════════════════════
@@ -715,7 +865,7 @@ function renderAll(beach,d){
   const tzOff=(month>=4&&month<=9)?3:2;
   const sc2=sunCalc(beach.lat,beach.lon,now,tzOff);
   const moonAge=((now-new Date(2024,0,11))/86400000)%29.53;
-  const moonPct=Math.round(Math.abs(Math.cos(moonAge/29.53*2*Math.PI))*100);
+  const moonPct=Math.round((1-Math.abs((moonAge/29.53*2)-1))*100);
   const moonPhase=moonAge<3.7?'מולד':moonAge<7.4?'סהר גדל':moonAge<11.1?'רבע ראשון':moonAge<14.8?'גדל':moonAge<18.4?'מלא':moonAge<22.1?'אחר המלא':moonAge<25.8?'רבע אחרון':'כלה';
   const moonIco=moonPct>85?'🌕':moonPct>60?'🌔':moonPct>35?'🌓':moonPct>10?'🌒':'🌑';
 
@@ -727,10 +877,10 @@ function renderAll(beach,d){
       <div style="font-size:19px;font-weight:800;color:var(--gold)">היום, ${now.getDate()}.${now.getMonth()+1}.${now.getFullYear()}</div>
       <div style="font-size:13px;color:var(--cyan)">${beach.name}</div>
     </div>
-    <div class="status-banner ${sl.cls}">${sl.text} – ציון ${cScore}/100</div>
+    <div class="status-banner ${sl.cls}">${sl.text} – ציון ${cScore}%</div>
     <div class="cgrid">
       <div class="cc hl">
-        <div class="cc-i">🌊</div><div class="cc-v">${Math.round(cWave*100)} ס"מ</div>
+        <div class="cc-i">🌊</div><div class="cc-v">${Math.round(cWave*100)}–${Math.round(cWave*100)+20} ס"מ</div>
         <div class="cc-s">${wvTxt(cWave)}</div><div class="cc-l">גלים</div>
       </div>
       ${cSwH!=null?`<div class="cc hl">
@@ -750,16 +900,10 @@ function renderAll(beach,d){
         <div class="cc-s">ים (SST)</div><div class="cc-l">מים אמיתי</div>
       </div>
       <div class="cc">
-        <div class="cc-i">⏱️</div><div class="cc-v">${Math.round(cPer)} ש"ג</div>
-        <div class="cc-s">תקופת גל</div>
-        <div class="cc-l" style="font-size:9px">מרווח בין גלים</div>
-      </div>
-      <div class="cc">
         <div class="cc-i">🔵</div><div class="cc-v">${cPres}</div>
         <div class="cc-s">hPa</div><div class="cc-l">לחץ</div>
       </div>
     </div>
-    <div class="info-note">💡 <strong>תקופת גל (Wave Period)</strong>: כמה שניות בין גל לגל. >8 ש"ג = סוואל ממרחק (גלים ארוכים ומסודרים, מצוין לדיג). &lt;5 ש"ג = רוח מקומית (גלים קצרים וסוערים).</div>
     <div style="margin-top:10px;background:var(--bg3);border-right:3px solid var(--gold);border-radius:0 7px 7px 0;padding:9px 11px;font-size:11px;line-height:1.6">
       <strong style="color:var(--gold)">💡 טיפ:</strong> ${beach.tip}
     </div>
@@ -782,6 +926,10 @@ function renderAll(beach,d){
         ${moonPct>80?'🌕 ירח מלא – פחות אידאלי לדיג לילי (לוקוס/גומבר)':moonPct<20?'🌑 מולד ירח – מצוין לדיג לילי!':'🌓 ירח חלקי – תנאים בינוניים בלילה'}
       </div>
     </div>
+  </div>
+  <div class="sec" style="padding:10px">
+    <div style="font-size:12px;color:var(--cyan);margin-bottom:6px">📍 מיקום החוף</div>
+    <div id="beachMiniMap" style="height:200px;border-radius:8px;overflow:hidden;border:1px solid var(--yborder)"></div>
   </div>`;
 
   // ── HOURLY ────────────────────────────────────────────────
@@ -792,7 +940,7 @@ function renderAll(beach,d){
     <div class="tbl-w">
     <table class="htbl">
       <thead><tr>
-        <th>שעה</th><th>💨 רוח</th><th>🌊 גלים</th><th>🌀 סוואל</th><th>⏱ תקופה</th>
+        <th>שעה</th><th>💨 רוח</th><th>🌊 גלים</th><th>🌀 סוואל</th>
         <th>🌡️ אוויר</th><th>💧 ים SST</th><th>🔵 לחץ</th><th>🌤 מזג</th>
       </tr></thead>
       <tbody>
@@ -800,9 +948,8 @@ function renderAll(beach,d){
       <tr class="${r.isCur?'now':''}">
         <td class="hrc">${f2(r.h)}:00${r.isCur?' ◀':''}</td>
         <td><span class="wb ${wBcls(r.ws)}">${wDir(r.wd)} ${r.ws}</span></td>
-        <td class="${wvCls(r.wv)}">${Math.round(r.wv*100)}ס"מ<br><span style="font-size:9px">${wvTxt(r.wv)}</span></td>
+        <td class="${wvCls(r.wv)}">${Math.round(r.wv*100)}–${Math.round(r.wv*100)+20}ס"מ<br><span style="font-size:9px">${wvTxt(r.wv)}</span></td>
         <td>${r.swH!=null?`<span class="swell-badge">${Math.round(r.swH*100)}ס"מ ${r.swP}ש"ג</span>`:'—'}</td>
-        <td style="color:var(--muted)">${r.wp}ש"ג</td>
         <td>${r.tp}°C</td>
         <td style="color:var(--cyan);font-weight:700">${r.sst!=null?Math.round(r.sst*10)/10+'°':'—'}</td>
         <td style="color:var(--muted)">${r.pr}</td>
@@ -819,12 +966,12 @@ function renderAll(beach,d){
     <div class="sec-t">📊 ציון פוטנציאל – ${beach.name}</div>
     <div class="sc-wrap">
       <div class="sc-circ">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="42" fill="none" stroke="#1c2230" stroke-width="9"/>
-          <circle cx="48" cy="48" r="42" fill="none" stroke="${bestSl.color}" stroke-width="9"
-            stroke-dasharray="${(best?.sc??50)*2.638} 263.8" stroke-linecap="round"/>
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="#181f2a" stroke-width="9"/>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="${bestSl.color}" stroke-width="9"
+            stroke-dasharray="${(best?.sc??50)*3.267} 326.7" stroke-linecap="round"/>
         </svg>
-        <div class="sc-num" style="color:${bestSl.color}">${best?.sc??50}</div>
+        <div class="sc-num" style="color:${bestSl.color}">${best?.sc??50}%</div>
       </div>
       <div class="sc-lbl" style="color:${bestSl.color}">${bestSl.text}</div>
       <div class="sc-time">⏰ ${f2(best?.h??6)}:00–${f2((best?.h??6)+2)}:00</div>
@@ -839,9 +986,9 @@ function renderAll(beach,d){
     <div class="pot-row">
       <div class="pot-hr">${f2(r.h)}:00</div>
       <div class="pot-bw"><div class="pot-b" style="width:${r.sc}%;background:${rsl.color}">
-        <span>${r.sc>=55?r.sc:''}</span>
+        <span>${r.sc>=55?r.sc+'%':''}</span>
       </div></div>
-      <div class="pot-lbl" style="color:${rsl.color};font-size:9px">${r.sc<55?r.sc:''}</div>
+      <div class="pot-lbl" style="color:${rsl.color}">${r.sc<55?r.sc+'%':''}</div>
       <div class="pot-tmp">${r.tp}°</div>
     </div>`;}).join('')}
   </div>
@@ -874,7 +1021,7 @@ function renderAll(beach,d){
         <div class="dc-n">${DAYS[w.dt.getDay()]}</div>
         <div class="dc-d">${w.dt.getDate()}/${w.dt.getMonth()+1}</div>
         <div class="dc-i">${wmoIcon(w.wc)}</div>
-        <div style="font-size:11px;font-weight:700;color:${w.sl2.color}">${w.sc}</div>
+        <div style="font-size:11px;font-weight:700;color:${w.sl2.color}">${w.sc}%</div>
         <div class="dc-w">${Math.round(w.wv*100)}ס"מ</div>
         <div style="font-size:9px;color:var(--muted)">💨${w.ws}</div>
       </div>`).join('')}
@@ -883,6 +1030,7 @@ function renderAll(beach,d){
   </div>`;
 
   window._wd=d;window._wb=beach;window._wboat=isBoat;
+  setTimeout(()=>initMiniMap(beach),150);
   renderFish(beach,now,moonAge,moonPct);
   renderInfo(beach,d,ci,cWave,cWind,cDir,cTemp,cPres,cSST,cPer,sc2,moonPhase,moonPct,moonIco,isBoat);
 }
@@ -893,20 +1041,18 @@ function drawChart(d,beach,isBoat){
   if(!ctx)return;
   if(waveChartInst){waveChartInst.destroy();waveChartInst=null;}
   const dayStr=new Date().toDateString();
-  const labels=[],waves=[],swells=[],scores=[],sst=[];
+  const labels=[],waves=[],scores=[],sst=[];
   for(let h=0;h<24;h++){
     const idx=d.hourly.time.findIndex(t=>{const dt=new Date(t);return dt.toDateString()===dayStr&&dt.getHours()===h;});
     if(idx<0)continue;
     labels.push(`${f2(h)}:00`);
     waves.push(Math.round((d.hourly.wave_height?.[idx]??0.5)*100));
-    swells.push(d.hourly.swell_wave_height?.[idx]!=null?Math.round(d.hourly.swell_wave_height[idx]*100):null);
     scores.push(fishScore(d.hourly.windspeed_10m[idx],d.hourly.wave_height?.[idx]??0.5,d.hourly.temperature_2m[idx],d.hourly.pressure_msl[idx],isBoat));
     sst.push(d.hourly.sea_surface_temperature?.[idx]!=null?Math.round(d.hourly.sea_surface_temperature[idx]*10)/10:null);
   }
   waveChartInst=new Chart(ctx,{
     data:{labels,datasets:[
       {type:'line',label:'גלים כולל (ס"מ)',data:waves,borderColor:'#00d4ff',backgroundColor:'#00d4ff18',fill:true,tension:0.4,pointRadius:0,yAxisID:'y'},
-      {type:'line',label:'סוואל (ס"מ)',data:swells,borderColor:'#7c4dff',backgroundColor:'transparent',fill:false,tension:0.4,pointRadius:0,yAxisID:'y',borderDash:[3,3]},
       {type:'line',label:'פוטנציאל דיג',data:scores,borderColor:'#f0b429',backgroundColor:'transparent',fill:false,tension:0.4,pointRadius:0,yAxisID:'y2'},
       {type:'line',label:'טמפ\' מים °C',data:sst,borderColor:'#ff9800',backgroundColor:'transparent',fill:false,tension:0.3,pointRadius:0,yAxisID:'y3',borderWidth:1.5}
     ]},
@@ -938,7 +1084,7 @@ function renderDayDetail(d,i,beach,isBoat){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
       <div><div style="font-size:14px;font-weight:700">${DAYS[dt.getDay()]}, ${dt.getDate()}/${dt.getMonth()+1}</div>
       <div style="font-size:11px;color:var(--muted)">${wmoIcon(wc)} ${wmoTxt(wc)}</div></div>
-      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:${sl.color}">${sc}</div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:${sl.color}">${sc}%</div>
       <div style="font-size:10px;color:${sl.color}">${sl.text}</div></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:11px;text-align:center">
@@ -990,9 +1136,10 @@ function renderFish(beach,now,moonAge,moonPct){
         <div><span class="k">💨 רוח:</span> ${f.windMin}–${f.windMax} קמ"ש</div>
         <div><span class="k">🔱 עומק:</span> ${f.depth}</div>
       </div>
-      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">🪝 פיתיון:</span> ${f.bait}</div>
-      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">🎣 שיטה:</span> ${f.method}</div>
-      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">🪨 מבנה:</span> ${f.structure}</div>
+      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">🎣 דמוי:</span> ${f.lure}</div>
+      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">🔄 שיטה:</span> ${f.method}</div>
+      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">⚙️ ציוד:</span> ${f.gear}</div>
+      <div style="font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">📍 מיקום:</span> ${f.structure}</div>
       <div class="fc-tip" style="border-color:${f.color}">${f.tip}</div>
       ${f.warning?`<div style="background:#ff525215;border-radius:5px;padding:5px 8px;font-size:10px;color:#ff5252;margin-top:5px">${f.warning}</div>`:''}
     </div>`;
@@ -1017,7 +1164,7 @@ function renderFish(beach,now,moonAge,moonPct){
     ${inS.map(f=>fishCard(f,true)).join('')}
     ${offS.length?`<div style="font-size:12px;font-weight:700;color:var(--muted);margin:12px 0 7px">⏳ לא בעונה (${offS.length} דגים)</div>${offS.map(f=>fishCard(f,false)).join('')}`:''}
     <div style="font-size:9px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5">
-      מקורות: ויקיפדיה דיג בישראל, dayag.co.il, mafish.org.il, FishBase, NOAA<br>
+      מקורות: fishingmagazine.co.il, fishnet.co.il, fishingaddicts.co.il, babajig.co.il<br>
       ⚖️ חוק: עד 5 ק"ג או 2 דגים גדולים ביום לדייג ספורט
     </div>
   </div>`;
@@ -1041,7 +1188,7 @@ function renderInfo(beach,d,ci,cWave,cWind,cDir,cTemp,cPres,cSST,cPer,sc2,moonPh
     <div class="ir"><div class="ik">☀️ זריחה</div><div class="iv">${sc2.sunrise}</div></div>
     <div class="ir"><div class="ik">🌆 שקיעה</div><div class="iv">${sc2.sunset}</div></div>
     <div class="ir"><div class="ik">🌙 ירח</div><div class="iv">${moonIco} ${moonPhase} – ${moonPct}%</div></div>
-    <div class="ir"><div class="ik">🎣 ציון דיג</div><div class="iv" style="color:${scoreLabel(cScore).color}">${cScore}/100 – ${scoreLabel(cScore).text}</div></div>
+    <div class="ir"><div class="ik">🎣 ציון דיג</div><div class="iv" style="color:${scoreLabel(cScore).color}">${cScore}% – ${scoreLabel(cScore).text}</div></div>
     <div style="margin-top:10px"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">🐟 דגי מטרה:</div>
     <div class="fish-list">${beach.fish.map(f=>`<span class="tag">🐟 ${f}</span>`).join('')}</div></div>
     <div style="margin-top:10px;background:var(--bg3);border-right:3px solid var(--gold);border-radius:0 7px 7px 0;padding:9px 11px;font-size:11px;line-height:1.6">
@@ -1059,14 +1206,6 @@ function renderInfo(beach,d,ci,cWave,cWind,cDir,cTemp,cPres,cSST,cPer,sc2,moonPh
 }
 
 // ════════════ INIT ═══════════════════════════════════════
-// Add map tab button dynamically
-const tabBar=document.querySelector('.tab-bar');
-const mapBtn=document.createElement('button');
-mapBtn.className='tb';
-mapBtn.textContent='🗺️ מפה';
-mapBtn.onclick=()=>showTab('map',mapBtn);
-tabBar.insertBefore(mapBtn,tabBar.children[1]);
-
 renderBeachGrid(BEACHES[curRegion]);
 </script>
 </body>
